@@ -18,7 +18,13 @@ driver.implicitly_wait(25)
 wait.until(EC.visibility_of_element_located((By.ID, "menuUser")))
 time.sleep(5)
 login(driver)
+
+for i in range (20):
+    action_chains.move_to_element(driver.find_element_by_id('menuCart')).perform()
+    time.sleep(2)
+
 CleanCart.clearCart(driver)
+action_chains.move_to_element(driver.find_element_by_id('menuCart')).perform()
 
 time.sleep(2)
 driver.find_element_by_id("see_offer_btn").click()
@@ -41,7 +47,35 @@ if total == requiredTotal:
     driver.find_element_by_id("shoppingCartLink").click()
     # driver.find_element_by_id("checkOutButton").click()
 
-# 2 2 2 2 2
+# 2 2 2 2 2 2 2                                  vardi all of 2 is on build right now so ignore it
+
+table = driver.find_element_by_xpath('//*[@id="shoppingCart"]/table/tbody')
+rows = table.find_elements_by_tag_name('tr')
+# name = HP PAVILION 15T TOUCH LAPTOP#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+# color = GRAY#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+# quantity = 1#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+# reqPrice = 519.99#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+counter = 0
+for row in rows:
+    tds = row.find_elements_by_tag_name('td')
+    for td in tds:
+        counter += 1
+        if counter == 2:
+            name = "HP PAVILION 15T TOUCH LAPTOP"#-----change this to get the requirment from the xl
+            # return name == td.text
+
+        if counter == 4:
+            color = "GRAY"  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+            # return color == td.find_element_by_tag_name('span').get_attribute("title")
+        if counter == 5:
+            quantity = 1#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+            # return quantity == int(td.text)
+        if counter == 6:
+            price = td.find_element_by_tag_name('p').text
+            currency = price[0]
+            price = float(price[1::])
+            reqPrice = 519.99  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+            # return reqPrice == price
 
 
 
