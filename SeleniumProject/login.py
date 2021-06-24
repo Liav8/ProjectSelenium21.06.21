@@ -7,10 +7,11 @@ import time
 
 
 def login(driver):
-    wait = WebDriverWait(driver, 3)
-    # wait.until(EC.visibility_of_element_located((By.ID, "menuUser")))
+    wait = WebDriverWait(driver, 10)
+    # wait.until(EC.element_to_be_clickable((By.ID, "menuUser")))
     login_page = driver.find_element_by_id("menuUser")
     login_page.click()
+    # wait.until(EC.element_to_be_clickable((By.ID, "username")))
     time.sleep(1.5)
     userName = driver.find_element_by_name("username")
     userName.click()

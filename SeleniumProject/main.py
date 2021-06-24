@@ -5,10 +5,14 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-import CleanCart
+from CleanCart import clearCart
 import time
+from openpyxl import *
 
 
+
+workbook = load_workbook(filename="DataTests.xlsx")
+sheet = workbook.active
 driver = webdriver.Chrome(executable_path=r"D:\QA Course\Selenium\chromedriver.exe")
 wait = WebDriverWait(driver, 20)
 action_chains = ActionChains(driver)
@@ -19,11 +23,11 @@ wait.until(EC.visibility_of_element_located((By.ID, "menuUser")))
 time.sleep(5)
 login(driver)
 
-for i in range (20):
-    action_chains.move_to_element(driver.find_element_by_id('menuCart')).perform()
-    time.sleep(2)
+# for i in range(20):
+#     action_chains.move_to_element(driver.find_element_by_id('menuCart')).perform()
+#     time.sleep(2)
 
-CleanCart.clearCart(driver)
+clearCart(driver)
 action_chains.move_to_element(driver.find_element_by_id('menuCart')).perform()
 
 time.sleep(2)
@@ -49,33 +53,36 @@ if total == requiredTotal:
 
 # 2 2 2 2 2 2 2                                  vardi all of 2 is on build right now so ignore it
 
-table = driver.find_element_by_xpath('//*[@id="shoppingCart"]/table/tbody')
-rows = table.find_elements_by_tag_name('tr')
-# name = HP PAVILION 15T TOUCH LAPTOP#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
-# color = GRAY#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
-# quantity = 1#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
-# reqPrice = 519.99#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
-counter = 0
-for row in rows:
-    tds = row.find_elements_by_tag_name('td')
-    for td in tds:
-        counter += 1
-        if counter == 2:
-            name = "HP PAVILION 15T TOUCH LAPTOP"#-----change this to get the requirment from the xl
-            # return name == td.text
-
-        if counter == 4:
-            color = "GRAY"  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
-            # return color == td.find_element_by_tag_name('span').get_attribute("title")
-        if counter == 5:
-            quantity = 1#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
-            # return quantity == int(td.text)
-        if counter == 6:
-            price = td.find_element_by_tag_name('p').text
-            currency = price[0]
-            price = float(price[1::])
-            reqPrice = 519.99  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
-            # return reqPrice == price
+# table = driver.find_element_by_xpath('//*[@id="shoppingCart"]/table/tbody')
+# rows = table.find_elements_by_tag_name('tr')
+# # name = HP PAVILION 15T TOUCH LAPTOP#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+# # color = GRAY#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+# # quantity = 1#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+# # reqPrice = 519.99#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+# counter = 0
+# for row in rows:
+#     tds = row.find_elements_by_tag_name('td')
+#     for td in tds:
+#         counter += 1
+#         if counter == 2:
+#             name = "HP PAVILION 15T TOUCH LAPTOP"#-----change this to get the requirment from the xl
+#             # return name == td.text
+#
+#         if counter == 4:
+#             color = "GRAY"  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+#             # return color == td.find_element_by_tag_name('span').get_attribute("title")
+#             print(td.find_element_by_tag_name('span').get_attribute("title"))
+#         if counter == 5:
+#             quantity = 1#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+#             # return quantity == int(td.text)
+#         if counter == 6:
+#             price = td.find_element_by_tag_name('p').text
+#             currency = price[0]
+#             price = price.replace(",", "").replace("$", "")
+#             price = float(price)
+#             reqPrice = 519.99  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+#             # return reqPrice == price
+#             counter = 0
 
 
 
@@ -87,26 +94,56 @@ rows = table.find_elements_by_tag_name('tr')
 # quantity = 1#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
 # reqPrice = 519.99#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
 counter = 0
+RowSheet = 2
+CulSheet = 2
+print(sheet.cell(row=RowSheet, column=CulSheet).value)
 for row in rows:
     tds = row.find_elements_by_tag_name('td')
     for td in tds:
         counter += 1
         if counter == 2:
-            name = "HP PAVILION 15T TOUCH LAPTOP"#-----change this to get the requirment from the xl
+            if td.text == sheet.cell(row=RowSheet, column=CulSheet).value:
+                print("True")
+            else:
+                print("False")
+            # name = "HP PAVILION 15T TOUCH LAPTOP"#-----change this to get the requirment from the xl
             # return name == td.text
+            CulSheet+=1
 
         if counter == 4:
-            color = "GRAY"  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+            if td.find_element_by_tag_name('span').get_attribute("title") == sheet.cell(row=RowSheet, column=CulSheet).value:
+                print("True")
+            else:
+                print("False")
+            # color = "GRAY"  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
             # return color == td.find_element_by_tag_name('span').get_attribute("title")
+            # print(td.find_element_by_tag_name('span').get_attribute("title"))
+            CulSheet+=1
+
         if counter == 5:
-            quantity = 1#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+            if int(td.text) == sheet.cell(row=RowSheet, column=CulSheet).value:
+                print("True")
+            else:
+                print("False")
+            # quantity = 1#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
             # return quantity == int(td.text)
+            CulSheet+=1
+
         if counter == 6:
+
             price = td.find_element_by_tag_name('p').text
             currency = price[0]
-            price = float(price[1::])
-            reqPrice = 519.99  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
+            price = price.replace(",", "").replace("$", "")
+            price = float(price)
+            if price == sheet.cell(row=RowSheet, column=CulSheet).value:
+                print("True")
+            else:
+                print("False")
+            # reqPrice = 519.99  # ----------------------------------------------------------------------------------------------change this to get the requirment from the xl
             # return reqPrice == price
+            counter = 0
+            CulSheet = 2
+            RowSheet += 1
 
 
 
