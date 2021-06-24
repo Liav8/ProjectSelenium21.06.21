@@ -12,7 +12,7 @@ from openpyxl import *
 
 
 
-workbook = load_workbook(filename="DataTests.xlsx")
+workbook = load_workbook(filename="DataTests.xlsx", data_only=True)
 sheet = workbook.active
 driver = webdriver.Chrome(executable_path=r"D:\QA Course\Selenium\chromedriver.exe")
 wait = WebDriverWait(driver, 20)
@@ -29,28 +29,29 @@ login(driver)
 
 clearCart(driver)
 action_chains.move_to_element(driver.find_element_by_id('menuCart')).perform()
-# print("1")
-# for row in sheet.iter_rows(min_row=2, max_row=4, min_col=2, max_col=4, values_only=True):
-#     addProduct(row[0], row[1], row[2], driver)
-# print("2")
+print("1")
+for row in sheet.iter_rows(min_row=2, max_row=4, min_col=2, max_col=4, values_only=True):
+    addProduct(row[0], row[1], row[2], driver)
+print("2")
 time.sleep(2)
-driver.find_element_by_id("see_offer_btn").click()
-time.sleep(3)
-plus = driver.find_element_by_class_name("plus")
-plus.click()
-plus.click()
-driver.find_element_by_name("save_to_cart").click()
-driver.find_element_by_xpath("/html/body/div[3]/nav/a[2]").click()
-driver.find_element_by_id("5").click()
-driver.find_element_by_name("save_to_cart").click()
-driver.back()
-driver.find_element_by_id("1").click()
-driver.find_element_by_name("save_to_cart").click()
+# driver.find_element_by_id("see_offer_btn").click()
+# time.sleep(3)
+# plus = driver.find_element_by_class_name("plus")
+# plus.click()
+# plus.click()
+# driver.find_element_by_name("save_to_cart").click()
+# driver.find_element_by_xpath("/html/body/div[3]/nav/a[2]").click()
+# driver.find_element_by_id("5").click()
+# driver.find_element_by_name("save_to_cart").click()
+# driver.back()
+# driver.find_element_by_id("1").click()
+# driver.find_element_by_name("save_to_cart").click()
 time.sleep(1)
-total = driver.find_element_by_css_selector('[ng-show="welcome" ] [class="cart ng-binding"]').text
+total = int(driver.find_element_by_css_selector('[ng-show="welcome" ] [class="cart ng-binding"]').text)
 time.sleep(1.5)
 requiredTotal = 5#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
-print(total == sheet.cell(row=5, column=4).value, "abagadaaaa")
+print(sheet.cell(row=5, column=4).value, " ", total)
+print(total == sheet.cell(row=5, column=4).value)
 
 
 

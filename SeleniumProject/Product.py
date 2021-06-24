@@ -17,12 +17,9 @@ def addProduct(name, color, quantity, driver):
     driver.find_element_by_id("menuSearch").click()
     driver.find_element_by_css_selector('[class="imgProduct"]').click()
     time.sleep(1)
-    color1 = '[ng-show="firstImageToShow"] [title="' + color + '"]'
-    color2 = "'" + color1 + "'"
-    print(color2, type(color2))
-    driver.find_element_by_css_selector(color2).click()
+    color = '[ng-show="firstImageToShow"]>[title="' + color + '"]'
     driver.find_element_by_css_selector(color).click()
-    print("PAAAAASSSSSSSSSSSSSSSS")
+    driver.find_element_by_name("quantity").click()
     driver.find_element_by_name("quantity").send_keys(str(quantity))
     driver.find_element_by_name("save_to_cart").click()
-    driver.back()
+    driver.find_element_by_css_selector('[class="logo"] [href="#/"]').click()
