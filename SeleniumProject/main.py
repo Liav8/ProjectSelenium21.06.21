@@ -1,10 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from SeleniumProject.usableFunctionalities import login
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from usableFunctionalities import login
+from Product import *
 from CleanCart import clearCart
 import time
 from openpyxl import *
@@ -18,18 +19,20 @@ wait = WebDriverWait(driver, 20)
 action_chains = ActionChains(driver)
 driver.get("https://www.advantageonlineshopping.com/#/")
 driver.maximize_window()
-driver.implicitly_wait(25)
+driver.implicitly_wait(1)
 wait.until(EC.visibility_of_element_located((By.ID, "menuUser")))
 time.sleep(5)
 login(driver)
-
 # for i in range(20):
 #     action_chains.move_to_element(driver.find_element_by_id('menuCart')).perform()
 #     time.sleep(2)
 
 clearCart(driver)
 action_chains.move_to_element(driver.find_element_by_id('menuCart')).perform()
-
+# print("1")
+# for row in sheet.iter_rows(min_row=2, max_row=4, min_col=2, max_col=4, values_only=True):
+#     addProduct(row[0], row[1], row[2], driver)
+# print("2")
 time.sleep(2)
 driver.find_element_by_id("see_offer_btn").click()
 time.sleep(3)
@@ -44,13 +47,15 @@ driver.back()
 driver.find_element_by_id("1").click()
 driver.find_element_by_name("save_to_cart").click()
 time.sleep(1)
-total = int(driver.find_element_by_css_selector('[ng-show="welcome" ] [class="cart ng-binding"]').text)
+total = driver.find_element_by_css_selector('[ng-show="welcome" ] [class="cart ng-binding"]').text
 time.sleep(1.5)
 requiredTotal = 5#----------------------------------------------------------------------------------------------change this to get the requirment from the xl
-if total == requiredTotal:
-    driver.find_element_by_id("shoppingCartLink").click()
-    # driver.find_element_by_id("checkOutButton").click()
+print(total == sheet.cell(row=5, column=4).value, "abagadaaaa")
 
+
+
+driver.find_element_by_id("shoppingCartLink").click()
+#driver.find_element_by_id("checkOutButton").click()
 # 2 2 2 2 2 2 2                                  vardi all of 2 is on build right now so ignore it
 
 # table = driver.find_element_by_xpath('//*[@id="shoppingCart"]/table/tbody')
@@ -96,12 +101,13 @@ rows = table.find_elements_by_tag_name('tr')
 counter = 0
 RowSheet = 2
 CulSheet = 2
-print(sheet.cell(row=RowSheet, column=CulSheet).value)
+
 for row in rows:
     tds = row.find_elements_by_tag_name('td')
     for td in tds:
         counter += 1
         if counter == 2:
+            print(sheet.cell(row=RowSheet, column=CulSheet).value + "!!!!!!!!!!!!!!")
             if td.text == sheet.cell(row=RowSheet, column=CulSheet).value:
                 print("True")
             else:
@@ -121,6 +127,7 @@ for row in rows:
             CulSheet+=1
 
         if counter == 5:
+            print(sheet.cell(row=RowSheet, column=CulSheet).value)
             if int(td.text) == sheet.cell(row=RowSheet, column=CulSheet).value:
                 print("True")
             else:

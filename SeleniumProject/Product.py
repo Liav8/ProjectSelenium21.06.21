@@ -11,13 +11,18 @@ from openpyxl import *
 
 
 def addProduct(name, color, quantity, driver):
-    SName = driver.find_element_by_name("search icon").click()
-    driver
-    SName.send_keys(name)
-    #press enter
-    #get to the product
-    #press the selected color buttin
-    #add quantities as requierd
-    #pres
+    driver.find_element_by_id("menuSearch").click()
+    driver.find_element_by_id("autoComplete").send_keys(name)
+    time.sleep(1)
+    driver.find_element_by_id("menuSearch").click()
+    driver.find_element_by_css_selector('[class="imgProduct"]').click()
+    time.sleep(1)
+    color1 = '[ng-show="firstImageToShow"] [title="' + color + '"]'
+    color2 = "'" + color1 + "'"
+    print(color2, type(color2))
+    driver.find_element_by_css_selector(color2).click()
+    driver.find_element_by_css_selector(color).click()
+    print("PAAAAASSSSSSSSSSSSSSSS")
+    driver.find_element_by_name("quantity").send_keys(str(quantity))
     driver.find_element_by_name("save_to_cart").click()
     driver.back()

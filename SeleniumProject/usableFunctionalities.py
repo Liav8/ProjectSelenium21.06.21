@@ -12,15 +12,10 @@ def login(driver):
     login_page = driver.find_element_by_id("menuUser")
     login_page.click()
     # wait.until(EC.element_to_be_clickable((By.ID, "username")))
-    time.sleep(1.5)
-    userName = driver.find_element_by_name("username")
-    userName.click()
-    userName.send_keys("Sa1234")
-    password = driver.find_element_by_name("password")
-    password.click()
-    password.send_keys("Sa1234")
-    loginButton = driver.find_element_by_id("sign_in_btnundefined")
-    loginButton.click()
+    time.sleep(3)
+    driver.find_element_by_name("username").send_keys("Sa1234")
+    driver.find_element_by_name("password").send_keys("Sa1234")
+    driver.find_element_by_id("sign_in_btnundefined").click()
 
 
 
