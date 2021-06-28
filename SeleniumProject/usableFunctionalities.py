@@ -9,6 +9,7 @@ import time
 def login(driver):
     wait = WebDriverWait(driver, 10)
     # wait.until(EC.element_to_be_clickable((By.ID, "menuUser")))
+    time.sleep(1)
     login_page = driver.find_element_by_id("menuUser")
     login_page.click()
     # wait.until(EC.element_to_be_clickable((By.ID, "username")))
@@ -19,17 +20,20 @@ def login(driver):
 
 def clearCart(driver):
     driver.find_element_by_xpath('//*[@id="menuCart"]').click()
+    time.sleep(1)
     remove = driver.find_elements_by_css_selector('[class="fixedTableEdgeCompatibility"] [translate="REMOVE"]')
     if remove != []:
         for i in range(len(remove)-1, -1, -1):
             remove[i].click()
             time.sleep(0.5)
+    time.sleep(0.5)
     driver.find_element_by_css_selector('[class="logo"] [href="#/"]').click()
 
 def getTotalSmallCart(driver):
-    # total = driver.find_element_by_css_selector('[class="emptyCart"] [class="roboto-regular"]').text
-    # total = total.replace(",", "").replace("$", "")
-    return int((driver.find_element_by_css_selector('[class="emptyCart"] [class="roboto-regular"]').text).replace("(", "").replace(")", ""))
+    total = driver.find_element_by_xpath('//span/label').text
+    total = total.replace("(", "").replace(")", "").replace(" Item", "").replace("s", "")
+    # return int((driver.find_element_by_css_selector('[class="emptyCart"] [class="roboto-regular"]').text).replace("(", "").replace(")", ""))
+    return int(total)
 
 
 
