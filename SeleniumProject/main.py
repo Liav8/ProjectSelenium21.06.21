@@ -28,7 +28,9 @@ class MainP:
 
     def logout(self, driver):
         driver.find_element_by_css_selector('[id="menuUserLink"]').click()
-        driver.find_element_by_css_selector('[translate="Sign_out"]').click()
+        time.sleep(0.2)
+        driver.find_element_by_css_selector('[id="menuUserLink"] [translate="Sign_out"]').click()
+        time.sleep(0.2)
 
     def clearCart(self, driver):
         driver.find_element_by_xpath('//*[@id="menuCart"]').click()

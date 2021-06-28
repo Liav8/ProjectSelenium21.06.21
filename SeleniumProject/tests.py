@@ -8,22 +8,22 @@ from CleanCart import *
 import time
 from openpyxl import *
 from main import *
+import random
 
 
 class Tests(TestCase):
 
     def setUp(self):
-        # self.page = MainP(webdriver.Chrome(executable_path=r"D:\QA Course\Selenium\chromedriver.exe"))
-        self.page = MainP(webdriver.Firefox(executable_path=r"D:\QA Course\ProjectSelenium21.06.21\SeleniumProject\geckodriver.exe"))
+        self.page = MainP(webdriver.Chrome(executable_path=r"D:\QA Course\Selenium\chromedriver.exe"))
+        # self.page = MainP(webdriver.Firefox(executable_path=r"D:\QA Course\ProjectSelenium21.06.21\SeleniumProject\geckodriver.exe"))
         self.sheet = load_workbook(filename="DataTests.xlsx", data_only=True).active
         wait = WebDriverWait(self.page.driver, 20)
         action_chains = ActionChains(self.page.driver)
         self.page.driver.get("https://www.advantageonlineshopping.com/#/")
-        time.sleep(10)
         self.page.driver.maximize_window()
         self.page.driver.implicitly_wait(1)
-        #wait.until(EC.visibility_of_element_located((By.ID, "menuUser")))
-        time.sleep(20)
+        # wait.until(EC.visibility_of_element_located((By.ID, "menuUser")))
+        time.sleep(5)
         login(self.page.driver)
         time.sleep(2)
         clearCart(self.page.driver)
@@ -84,12 +84,15 @@ class Tests(TestCase):
         self.assertEqual(self.page.getTotalBigCart(self.page.driver), 8)
 
     def test7(self):
-        self.page.driver.find_element_by_css_selector('id="tabletsImg"').click()
-        self.page.driver.find_element_by_css_selector('id = "18"').click()
-        self.page.driver.find_element_by_css_selector('name="save_to_cart"').click()
+        self.page.driver.find_element_by_css_selector('[id="tabletsImg"]').click()
+        time.sleep(1)
+        self.page.driver.find_element_by_css_selector('[id = "18"]').click()
+        time.sleep(1)
+        self.page.driver.find_element_by_css_selector('[name="save_to_cart"]').click()
         self.page.driver.back()
         self.page.driver.back()
-        self.assertEqual(self.page.driver.find_element_by_css_selector('translate="SPACIAL_OFFER"').text, "SPECIAL OFFER")
+        print(self.page.driver.find_element_by_css_selector('[id="special_offer_items"] [translate="SPACIAL_OFFER"]').text, "SPECIAL OFFER")
+        self.assertEqual(self.page.driver.find_element_by_css_selector('[id="special_offer_items"] [translate="SPACIAL_OFFER"]').text, "SPECIAL OFFER")
 
     def test8(self):
         self.page.logout(self.page.driver)
@@ -97,9 +100,21 @@ class Tests(TestCase):
             addProduct(row[0], row[1], row[2], self.page.driver)
         self.page.driver.find_element_by_xpath('//*[@id="menuCart"]').click()
         self.page.driver.find_element_by_css_selector('[id="checkOutButton"]').click()
-        time.sleep(5)
-
-        #enter the new user's details
+        time.sleep(1)
+        self.page.driver.find_element_by_css_selector('[id="registration_btnundefined"]').click()
+        rand = random
+        rnd =str(random.randint(100000, 999999))
+        rnd = "Dd" + rnd + ".com"
+        self.page.driver.find_element_by_name("usernameRegisterPage").send_keys(rnd)
+        self.page.driver.find_element_by_name("passwordRegisterPage").send_keys(rnd)
+        self.page.driver.find_element_by_name("confirm_passwordRegisterPage").send_keys(rnd)
+        rnd = rnd.replace("d", "@")
+        print(rnd)
+        self.page.driver.find_element_by_name("emailRegisterPage").send_keys(rnd)
+        self.page.driver.find_element_by_css_selector('[name="i_agree"]').click()
+        self.page.driver.find_element_by_css_selector('[id="register_btnundefined"]').click()
+        time.sleep(15)
+#stoped here-----------------------------------------------------------------------------------------------------------stoped here
 
         self.page.driver.find_element_by_css_selector('[id="next_btn"]').click()
         time.sleep(1)

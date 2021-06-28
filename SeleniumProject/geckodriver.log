@@ -28,3 +28,71 @@ http://requirejs.org/docs/errors.html#scripterror
 
 ###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1624907306655	geckodriver	INFO	Listening on 127.0.0.1:56229
+1624907309690	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\liavb\\AppData\\Local\\Temp\\rust_mozprofileosT7YE"
+1624907310087	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\liavb\\AppData\\Local\\Temp\\rust_mozprofileosT7YE\\search.json.mozlz4", (void 0)))
+1624907312626	Marionette	INFO	Listening on port 63024
+1624907312881	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.advantageonlineshopping.com/vendor/requirejs/require.js, line 165: Error: Script error for "main.min"
+http://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://www.advantageonlineshopping.com/vendor/requirejs/require.js, line 165: Error: Script error for "main.min"
+http://requirejs.org/docs/errors.html#scripterror
+1624907327286	Marionette	INFO	Stopped listening on port 63024
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624917821936	geckodriver	INFO	Listening on 127.0.0.1:56389
+1624917824972	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\liavb\\AppData\\Local\\Temp\\rust_mozprofilebRnYzh"
+1624917825365	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\liavb\\AppData\\Local\\Temp\\rust_mozprofilebRnYzh\\search.json.mozlz4", (void 0)))
+1624917827822	Marionette	INFO	Listening on port 49572
+1624917828122	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.advantageonlineshopping.com/vendor/requirejs/require.js, line 165: Error: Script error for "main.min"
+http://requirejs.org/docs/errors.html#scripterror
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624917835506	Marionette	INFO	Stopped listening on port 49572
+1624917863336	geckodriver	INFO	Listening on 127.0.0.1:54096
+1624917866378	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\liavb\\AppData\\Local\\Temp\\rust_mozprofilexfvrOC"
+1624917866751	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\liavb\\AppData\\Local\\Temp\\rust_mozprofilexfvrOC\\search.json.mozlz4", (void 0)))
+1624917869093	Marionette	INFO	Listening on port 53872
+1624917869572	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.advantageonlineshopping.com/vendor/requirejs/require.js, line 165: Error: Script error for "main.min"
+http://requirejs.org/docs/errors.html#scripterror
+1624917892716	Marionette	INFO	Stopped listening on port 53872
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
